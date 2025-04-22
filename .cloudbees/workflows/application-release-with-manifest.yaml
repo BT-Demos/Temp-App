@@ -1,0 +1,81 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: Application Release with manifest
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        type: string
+        required: true
+jobs:
+  pre-prod:
+    environment: pre-prod
+    steps:
+      - name: Deploy App7-Frontend to Preprod
+        kind: deploy
+        if: ${{ fromJSON(inputs.manifest)['App7-Frontend']['App7-Frontend'].deploy }}
+        uses: cloudbees-io/register-deployed-artifact@v1
+        with:
+          version: ${{ fromJSON(inputs.manifest)['App7-Frontend']['App7-Frontend'].version }}
+          url: ${{ fromJSON(inputs.manifest)['App7-Frontend']['App7-Frontend'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['App7-Frontend']['App7-Frontend'].digest }}
+          target-environment: pre-prod
+          name: App7-Frontend
+
+      - name: Deploy App7-Backend to Preprod
+        kind: deploy
+        if: ${{ fromJSON(inputs.manifest)['App7-Backend']['App7-Backend'].deploy }}
+        uses: cloudbees-io/register-deployed-artifact@v1
+        with:
+          version: ${{ fromJSON(inputs.manifest)['App7-Backend']['App7-Backend'].version }}
+          url: ${{ fromJSON(inputs.manifest)['App7-Backend']['App7-Backend'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['App7-Backend']['App7-Backend'].digest }}
+          target-environment: pre-prod
+          name: App7-Backend
+
+      - name: Deploy App7-APIs to Preprod
+        kind: deploy
+        if: ${{ fromJSON(inputs.manifest)['App7-APIs']['App7-APIs'].deploy }}
+        uses: cloudbees-io/register-deployed-artifact@v1
+        with:
+          version: ${{ fromJSON(inputs.manifest)['App7-APIs']['App7-APIs'].version }}
+          url: ${{ fromJSON(inputs.manifest)['App7-APIs']['App7-APIs'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['App7-APIs']['App7-APIs'].digest }}
+          target-environment: pre-prod
+          name: App7-APIs
+  prod:
+    needs: pre-prod
+    environment: prod
+    steps:
+      - name: Deploy App7-Frontend to Prod
+        kind: deploy
+        if: ${{ fromJSON(inputs.manifest)['App7-Frontend']['App7-Frontend'].deploy }}
+        uses: cloudbees-io/register-deployed-artifact@v1
+        with:
+          version: ${{ fromJSON(inputs.manifest)['App7-Frontend']['App7-Frontend'].version }}
+          url: ${{ fromJSON(inputs.manifest)['App7-Frontend']['App7-Frontend'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['App7-Frontend']['App7-Frontend'].digest }}
+          target-environment: prod
+          name: App7-Frontend
+
+      - name: Deploy App7-Backend to Prod
+        kind: deploy
+        if: ${{ fromJSON(inputs.manifest)['App7-Backend']['App7-Backend'].deploy }}
+        uses: cloudbees-io/register-deployed-artifact@v1
+        with:
+          version: ${{ fromJSON(inputs.manifest)['App7-Backend']['App7-Backend'].version }}
+          url: ${{ fromJSON(inputs.manifest)['App7-Backend']['App7-Backend'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['App7-Backend']['App7-Backend'].digest }}
+          target-environment: prod
+          name: App7-Backend
+
+      - name: Deploy App7-APIs to Prod
+        kind: deploy
+        if: ${{ fromJSON(inputs.manifest)['App7-APIs']['App7-APIs'].deploy }}
+        uses: cloudbees-io/register-deployed-artifact@v1
+        with:
+          version: ${{ fromJSON(inputs.manifest)['App7-APIs']['App7-APIs'].version }}
+          url: ${{ fromJSON(inputs.manifest)['App7-APIs']['App7-APIs'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['App7-APIs']['App7-APIs'].digest }}
+          target-environment: prod
+          name: App7-APIs
