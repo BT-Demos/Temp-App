@@ -11,71 +11,71 @@ jobs:
   pre-prod:
     environment: pre-prod
     steps:
-      - name: Deploy App9-Frontend to Preprod
+      - name: Deploy SampleApp-Frontend to Preprod
         kind: deploy
-        if: ${{ fromJSON(inputs.manifest)['App9-Frontend']['App9-Frontend'].deploy }}
+        if: ${{ fromJSON(inputs.manifest)['SampleApp-Frontend']['SampleApp-Frontend'].deploy }}
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          version: ${{ fromJSON(inputs.manifest)['App9-Frontend']['App9-Frontend'].version }}
-          url: ${{ fromJSON(inputs.manifest)['App9-Frontend']['App9-Frontend'].url }}
-          digest: ${{ fromJSON(inputs.manifest)['App9-Frontend']['App9-Frontend'].digest }}
+          version: ${{ fromJSON(inputs.manifest)['SampleApp-Frontend']['SampleApp-Frontend'].version }}
+          url: ${{ fromJSON(inputs.manifest)['SampleApp-Frontend']['SampleApp-Frontend'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['SampleApp-Frontend']['SampleApp-Frontend'].digest }}
           target-environment: pre-prod
-          name: App9-Frontend
+          name: SampleApp-Frontend
 
-      - name: Deploy App9-Backend to Preprod
+      - name: Deploy SampleApp-Backend to Preprod
         kind: deploy
-        if: ${{ fromJSON(inputs.manifest)['App9-Backend']['App9-Backend'].deploy }}
+        if: ${{ fromJSON(inputs.manifest)['SampleApp-Backend']['SampleApp-Backend'].deploy }}
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          version: ${{ fromJSON(inputs.manifest)['App9-Backend']['App9-Backend'].version }}
-          url: ${{ fromJSON(inputs.manifest)['App9-Backend']['App9-Backend'].url }}
-          digest: ${{ fromJSON(inputs.manifest)['App9-Backend']['App9-Backend'].digest }}
+          version: ${{ fromJSON(inputs.manifest)['SampleApp-Backend']['SampleApp-Backend'].version }}
+          url: ${{ fromJSON(inputs.manifest)['SampleApp-Backend']['SampleApp-Backend'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['SampleApp-Backend']['SampleApp-Backend'].digest }}
           target-environment: pre-prod
-          name: App9-Backend
+          name: SampleApp-Backend
 
-      - name: Deploy App9-APIs to Preprod
+      - name: Deploy SampleApp-APIs to Preprod
         kind: deploy
-        if: ${{ fromJSON(inputs.manifest)['App9-APIs']['App9-APIs'].deploy }}
+        if: ${{ fromJSON(inputs.manifest)['SampleApp-APIs']['SampleApp-APIs'].deploy }}
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          version: ${{ fromJSON(inputs.manifest)['App9-APIs']['App9-APIs'].version }}
-          url: ${{ fromJSON(inputs.manifest)['App9-APIs']['App9-APIs'].url }}
-          digest: ${{ fromJSON(inputs.manifest)['App9-APIs']['App9-APIs'].digest }}
+          version: ${{ fromJSON(inputs.manifest)['SampleApp-APIs']['SampleApp-APIs'].version }}
+          url: ${{ fromJSON(inputs.manifest)['SampleApp-APIs']['SampleApp-APIs'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['SampleApp-APIs']['SampleApp-APIs'].digest }}
           target-environment: pre-prod
-          name: App9-APIs
+          name: SampleApp-APIs
   prod:
     needs: pre-prod
     environment: prod
     steps:
-      - name: Deploy App9-Frontend to Prod
+      - name: Deploy SampleApp-Frontend to Prod
         kind: deploy
-        if: ${{ fromJSON(inputs.manifest)['App9-Frontend']['App9-Frontend'].deploy }}
+        if: ${{ fromJSON(inputs.manifest)['SampleApp-Frontend']['SampleApp-Frontend'].deploy }}
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          version: ${{ fromJSON(inputs.manifest)['App9-Frontend']['App9-Frontend'].version }}
-          url: ${{ fromJSON(inputs.manifest)['App9-Frontend']['App9-Frontend'].url }}
-          digest: ${{ fromJSON(inputs.manifest)['App9-Frontend']['App9-Frontend'].digest }}
+          version: ${{ fromJSON(inputs.manifest)['SampleApp-Frontend']['SampleApp-Frontend'].version }}
+          url: ${{ fromJSON(inputs.manifest)['SampleApp-Frontend']['SampleApp-Frontend'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['SampleApp-Frontend']['SampleApp-Frontend'].digest }}
           target-environment: prod
-          name: App9-Frontend
+          name: SampleApp-Frontend
 
-      - name: Deploy App9-Backend to Prod
+      - name: Deploy SampleApp-Backend to Prod
         kind: deploy
-        if: ${{ fromJSON(inputs.manifest)['App9-Backend']['App9-Backend'].deploy }}
+        if: ${{ fromJSON(inputs.manifest)['SampleApp-Backend']['SampleApp-Backend'].deploy }}
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          version: ${{ fromJSON(inputs.manifest)['App9-Backend']['App9-Backend'].version }}
-          url: ${{ fromJSON(inputs.manifest)['App9-Backend']['App9-Backend'].url }}
-          digest: ${{ fromJSON(inputs.manifest)['App9-Backend']['App9-Backend'].digest }}
+          version: ${{ fromJSON(inputs.manifest)['SampleApp-Backend']['SampleApp-Backend'].version }}
+          url: ${{ fromJSON(inputs.manifest)['SampleApp-Backend']['SampleApp-Backend'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['SampleApp-Backend']['SampleApp-Backend'].digest }}
           target-environment: prod
-          name: App9-Backend
+          name: SampleApp-Backend
 
-      - name: Deploy App9-APIs to Prod
+      - name: Deploy SampleApp-APIs to Prod
         kind: deploy
-        if: ${{ fromJSON(inputs.manifest)['App9-APIs']['App9-APIs'].deploy }}
+        if: ${{ fromJSON(inputs.manifest)['SampleApp-APIs']['SampleApp-APIs'].deploy }}
         uses: cloudbees-io/register-deployed-artifact@v1
         with:
-          version: ${{ fromJSON(inputs.manifest)['App9-APIs']['App9-APIs'].version }}
-          url: ${{ fromJSON(inputs.manifest)['App9-APIs']['App9-APIs'].url }}
-          digest: ${{ fromJSON(inputs.manifest)['App9-APIs']['App9-APIs'].digest }}
+          version: ${{ fromJSON(inputs.manifest)['SampleApp-APIs']['SampleApp-APIs'].version }}
+          url: ${{ fromJSON(inputs.manifest)['SampleApp-APIs']['SampleApp-APIs'].url }}
+          digest: ${{ fromJSON(inputs.manifest)['SampleApp-APIs']['SampleApp-APIs'].digest }}
           target-environment: prod
-          name: App9-APIs
+          name: SampleApp-APIs
